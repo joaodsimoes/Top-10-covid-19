@@ -1,7 +1,29 @@
-#!/bin/sh  
-while true  
-do  
-  curl -s https://corona-stats.online > corona && grep -B1 -A21 "Rank" corona && grep "Portugal" -A1 corona
-  printf  "Last updated at: " && date 
-  sleep 300  
+#!/bin/sh
+
+print_update(){
+  cat ~/scripts/bash/corona
+  printf  "Last updated at: " && date
+}
+
+trim_output(){
+  curl -s https://corona-stats.online > ~/scripts/bash/rawCorona
+  grep -B1 -A21 "Rank" ~/scripts/bash/rawCorona && grep "Portugal" -A1 ~/scripts/bash/rawCorona
+  rm ~/scripts/bash/rawCorona
+}
+
+#Initial setup
+trim_output > ~/scripts/bash/corona
+print_update
+sleep 300
+
+#Checks for updates
+while true
+do
+  trim_output > ~/scripts/bash/newCorona
+  if ! cmp ~/scripts/bash/corona ~/scripts/bash/newCorona >/dev/null  2>&1
+  then
+  	mv newCorona corona
+  	print_update
+  fi
+  sleep 300
 done
