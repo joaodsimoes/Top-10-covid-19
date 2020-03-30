@@ -1,0 +1,2 @@
+# Top-10-covid-19
+Simple bash script that outputs every 5 minutes the top 10 countries by cases of covid-19, plus Portugal and its position on the ranking
