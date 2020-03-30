@@ -1,0 +1,6 @@
+#!/bin/sh  
+while true  
+do  
+  curl -s https://corona-stats.online > corona && grep -B1 -A21 "Rank" corona && grep "Portugal" -A1 corona
+  sleep 300  
+done
