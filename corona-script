@@ -22,7 +22,7 @@ do
   trim_output > ~/scripts/bash/newCorona
   if ! cmp ~/scripts/bash/corona ~/scripts/bash/newCorona >/dev/null  2>&1
   then
-  	mv newCorona corona
+  	mv ~/scripts/bash/newCorona ~/scripts/bash/corona
   	print_update
   fi
   sleep 300
